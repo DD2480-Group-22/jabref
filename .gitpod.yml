@@ -1,0 +1,4 @@
+tasks:
+  - init: ./gradlew assemble
+image:
+  file: .gitpod.Dockerfile
