@@ -65,17 +65,26 @@ public class AppearanceTabViewModel implements PreferenceTabViewModel {
             case ThemeLoader.DARK_CSS:
                 themeLightProperty.setValue(false);
                 themeDarkProperty.setValue(true);
+                themeImportedProperty.setValue(false);
                 themeCustomProperty.setValue(false);
                 break;
             case ThemeLoader.MAIN_CSS:
                 themeLightProperty.setValue(true);
                 themeDarkProperty.setValue(false);
+                themeImportedProperty.setValue(false);
                 themeCustomProperty.setValue(false);
+                break;
+            case ThemeLoader.CUSTOM_CSS:
+                themeLightProperty.setValue(false);
+                themeDarkProperty.setValue(false);
+                themeImportedProperty.setValue(false);
+                themeCustomProperty.setValue(true);
                 break;
             default:
                 themeLightProperty.setValue(false);
                 themeDarkProperty.setValue(false);
-                themeCustomProperty.setValue(true);
+                themeImportedProperty.setValue(true);
+                themeCustomProperty.setValue(false);
         }
     }
 
@@ -99,12 +108,12 @@ public class AppearanceTabViewModel implements PreferenceTabViewModel {
             restartWarnings.add(Localization.lang("Theme changed to dark theme."));
             preferences.put(JabRefPreferences.FX_THEME, ThemeLoader.DARK_CSS);
         } else if (themeImportedProperty.getValue()) {
-            restartWarnings.add(Localization.lang("Theme change to a custom theme."));
+            restartWarnings.add(Localization.lang("Theme change to a imported theme."));
             preferences.put(JabRefPreferences.FX_THEME, preferences.getPathToCustomTheme());
         } else if (themeCustomProperty.getValue()) {
             restartWarnings.add(Localization.lang("Theme change to a custom theme."));
             //TODO: Create and call function for creating custom CSS
-            //preferences.put(JabRefPreferences.FX_THEME, preferences.getPathToCustomTheme());
+            preferences.put(JabRefPreferences.FX_THEME, ThemeLoader.CUSTOM_CSS);
         }
     }
 

@@ -39,6 +39,7 @@ public class ThemeLoader {
 
     public static final String MAIN_CSS = "Base.css";
     public static final String DARK_CSS = "Dark.css";
+    public static final String CUSTOM_CSS = "Custom.css";
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ThemeLoader.class);
     private final Optional<URL> additionalCssToLoad;
@@ -64,6 +65,8 @@ public class ThemeLoader {
             // Otherwise load css from preference
             Optional<URL> cssResource = Optional.empty();
             if (DARK_CSS.equals(cssPreferences)) {
+                cssResource = Optional.ofNullable(JabRefFrame.class.getResource(cssPreferences));
+            } else if (CUSTOM_CSS.equals(cssPreferences)) {
                 cssResource = Optional.ofNullable(JabRefFrame.class.getResource(cssPreferences));
             } else {
                 try {
