@@ -14,7 +14,7 @@ public class PreviewPreferences {
     private final Number previewPanelDividerPosition;
     private final String previewStyle;
     private final String previewStyleDefault;
-    private final boolean showPreviewAsExtraTab;
+    public final boolean showPreviewAsExtraTab;
 
     public PreviewPreferences(List<PreviewLayout> previewCycle, int previewCyclePosition, Number previewPanelDividerPosition, String previewStyle, String previewStyleDefault, boolean showPreviewAsExtraTab) {
         this.previewCycle = previewCycle;

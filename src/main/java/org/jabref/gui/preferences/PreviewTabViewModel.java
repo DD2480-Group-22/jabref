@@ -68,6 +68,7 @@ public class PreviewTabViewModel implements PreferenceTabViewModel {
     private final CustomLocalDragboard localDragboard = GUIGlobals.localDragboard;
     private Validator chosenListValidator;
     private ListProperty<PreviewLayout> dragSourceList = null;
+    private List<String> restartWarnings = new ArrayList<>();
 
     public PreviewTabViewModel(DialogService dialogService, JabRefPreferences preferences, TaskExecutor taskExecutor) {
         this.dialogService = dialogService;
@@ -181,6 +182,12 @@ public class PreviewTabViewModel implements PreferenceTabViewModel {
             chosenListProperty.add(previewPreferences.getTextBasedPreviewLayout());
         }
 
+        if (!previewPreferences.showPreviewAsExtraTab && showAsExtraTab.getValue() ) {
+            restartWarnings.add(Localization.lang("Preview separate tab enabled"));
+        } else if (previewPreferences.showPreviewAsExtraTab && !showAsExtraTab.getValue() ) {
+            restartWarnings.add(Localization.lang("Preview separate tab disabled"));
+
+        }
         PreviewLayout previewStyle = findLayoutByName("Preview");
         if (previewStyle == null) {
             previewStyle = previewPreferences.getTextBasedPreviewLayout();
@@ -226,7 +233,7 @@ public class PreviewTabViewModel implements PreferenceTabViewModel {
     }
 
     @Override
-    public List<String> getRestartWarnings() { return new ArrayList<>(); }
+    public List<String> getRestartWarnings() { return restartWarnings; }
 
     public void addToChosen() {
         List<PreviewLayout> selected = new ArrayList<>(availableSelectionModelProperty.getValue().getSelectedItems());
@@ -460,4 +467,5 @@ public class PreviewTabViewModel implements PreferenceTabViewModel {
     public ObjectProperty<PreviewLayout> layoutProperty() { return layoutProperty; }
 
     public StringProperty sourceTextProperty() { return sourceTextProperty; }
+
 }
