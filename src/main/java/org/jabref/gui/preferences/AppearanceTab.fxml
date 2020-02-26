@@ -29,5 +29,15 @@
     <Label styleClass="sectionHeader" text="%Visual theme"/>
     <RadioButton fx:id="themeLight" text="%Light theme" toggleGroup="$theme"/>
     <RadioButton fx:id="themeDark" text="%Dark theme" toggleGroup="$theme"/>
-    <RadioButton fx:id="customTheme" text="%Custom theme" toggleGroup="$theme" />
+    <RadioButton fx:id="themeImported" text="Imported theme" toggleGroup="$theme" />
+    <RadioButton fx:id="themeCustom" text="%Custom theme" toggleGroup="$theme" />
+    <HBox spacing="4.0" alignment="CENTER_LEFT">
+        <Label text="%Color" disable="${!themeCustom.selected}"/>
+        <TextField fx:id="backgroundColor" prefWidth="60" alignment="CENTER_RIGHT" disable="${!themeCustom.selected}"/>
+    </HBox>
+    <HBox spacing="4.0" alignment="CENTER_LEFT">
+        <Label text="%Color" disable="${!themeCustom.selected}"/>
+        <TextField fx:id="textColor" prefWidth="60" alignment="CENTER_RIGHT" disable="${!themeCustom.selected}"/>
+    </HBox>
+
 </fx:root>

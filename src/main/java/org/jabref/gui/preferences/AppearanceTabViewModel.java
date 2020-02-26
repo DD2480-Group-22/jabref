@@ -25,6 +25,10 @@ public class AppearanceTabViewModel implements PreferenceTabViewModel {
     private final BooleanProperty themeLightProperty = new SimpleBooleanProperty();
     private final BooleanProperty themeDarkProperty = new SimpleBooleanProperty();
     private final BooleanProperty themeCustomProperty = new SimpleBooleanProperty();
+    private final BooleanProperty themeImportedProperty = new SimpleBooleanProperty();
+
+    private final StringProperty backgroundColorProperty = new SimpleStringProperty();
+    private final StringProperty textColorProperty = new SimpleStringProperty();
 
     private final DialogService dialogService;
     private final JabRefPreferences preferences;
@@ -94,9 +98,13 @@ public class AppearanceTabViewModel implements PreferenceTabViewModel {
         } else if (themeDarkProperty.getValue() && !preferences.get(JabRefPreferences.FX_THEME).equals(ThemeLoader.DARK_CSS)) {
             restartWarnings.add(Localization.lang("Theme changed to dark theme."));
             preferences.put(JabRefPreferences.FX_THEME, ThemeLoader.DARK_CSS);
-        } else if (themeCustomProperty.getValue()) {
+        } else if (themeImportedProperty.getValue()) {
             restartWarnings.add(Localization.lang("Theme change to a custom theme."));
             preferences.put(JabRefPreferences.FX_THEME, preferences.getPathToCustomTheme());
+        } else if (themeCustomProperty.getValue()) {
+            restartWarnings.add(Localization.lang("Theme change to a custom theme."));
+            //TODO: Create and call function for creating custom CSS
+            //preferences.put(JabRefPreferences.FX_THEME, preferences.getPathToCustomTheme());
         }
     }
 
@@ -123,5 +131,11 @@ public class AppearanceTabViewModel implements PreferenceTabViewModel {
 
     public BooleanProperty themeDarkProperty() { return themeDarkProperty; }
 
-    public BooleanProperty customThemeProperty() { return themeCustomProperty; }
+    public BooleanProperty themeCustomProperty() { return themeCustomProperty; }
+
+    public BooleanProperty themeImportedProperty() { return themeImportedProperty; }
+
+    public StringProperty backgroundColorProperty() { return backgroundColorProperty; }
+
+    public StringProperty textColorProperty() { return textColorProperty; }
 }
