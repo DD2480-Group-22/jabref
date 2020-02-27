@@ -30,8 +30,9 @@ public class AppearanceTabViewModel implements PreferenceTabViewModel {
     private final BooleanProperty themeCustomProperty = new SimpleBooleanProperty();
     private final BooleanProperty themeImportedProperty = new SimpleBooleanProperty();
 
-    private final StringProperty backgroundColorProperty = new SimpleStringProperty();
-    private final StringProperty textColorProperty = new SimpleStringProperty();
+    private final StringProperty colorBackgroundProperty = new SimpleStringProperty();
+    private final StringProperty colorTextProperty = new SimpleStringProperty();
+    private final StringProperty colorHighlightProperty = new SimpleStringProperty();
 
     private final DialogService dialogService;
     private final JabRefPreferences preferences;
@@ -116,13 +117,24 @@ public class AppearanceTabViewModel implements PreferenceTabViewModel {
         } else if (themeCustomProperty.getValue()) {
             restartWarnings.add(Localization.lang("Theme change to a custom theme."));
             //TODO: Create and call function for creating custom CSS
-            writeCustomTheme("#ddeedd", "#112211");
+            writeCustomTheme(colorBackgroundProperty.getValueSafe(), colorTextProperty.getValueSafe(), colorHighlightProperty.getValueSafe());
             preferences.put(JabRefPreferences.FX_THEME, ThemeLoader.CUSTOM_CSS);
         }
     }
 
     //TODO: Maybe move function to more appropriate file
-    private void writeCustomTheme(String background, String text) {
+    private void writeCustomTheme(String background, String text, String highlight) {
+        String colorCodeRegex = "\\#[\\dabcdef]{6}";
+        if (!background.matches(colorCodeRegex)) {
+            background = "#dedede";
+        }
+        if (!text.matches(colorCodeRegex)) {
+            text = "#101010";
+        }
+        if (!highlight.matches(colorCodeRegex)) {
+            highlight = "#919191";
+        }
+
         String path = "src/main/java/org/jabref/gui/";
         try {
             BufferedReader templateReader = new BufferedReader(new FileReader(path+"CustomTemplate.css"));
@@ -131,8 +143,8 @@ public class AppearanceTabViewModel implements PreferenceTabViewModel {
             String line = null;
             while ((line = templateReader.readLine()) != null) {
                 line = line.replace("[background]", background);
-                line = line.replace("[background-light]", colorCodeModifier(background, -1, -1, 0));
-                line = line.replace("[text]", text);
+                line = line.replace("[background-l1]", colorCodeModifier(background, -2, -2, -1));
+
 
                 themeWriter.write(line+"\n");
             }
@@ -154,8 +166,16 @@ public class AppearanceTabViewModel implements PreferenceTabViewModel {
         green += greenModification;
         blue += blueModification;
 
-        String modifiedColorCode = "#" + Integer.toHexString(red) + Integer.toHexString(green) + Integer.toHexString(blue);
+        red = (red < 0 ) ? 0 : red;
+        green = (green < 0 ) ? 0 : green;
+        blue = (blue < 0 ) ? 0 : blue;
 
+        red = (red > 255 ) ? 255 : red;
+        green = (green > 255 ) ? 255 : green;
+        blue = (blue > 255 ) ? 255 : blue;
+
+        String modifiedColorCode = "#" + Integer.toHexString(red) + Integer.toHexString(green) + Integer.toHexString(blue);
+        
         return modifiedColorCode;
     }
 
@@ -186,7 +206,9 @@ public class AppearanceTabViewModel implements PreferenceTabViewModel {
 
     public BooleanProperty themeImportedProperty() { return themeImportedProperty; }
 
-    public StringProperty backgroundColorProperty() { return backgroundColorProperty; }
+    public StringProperty colorBackgroundProperty() { return colorBackgroundProperty; }
 
-    public StringProperty textColorProperty() { return textColorProperty; }
+    public StringProperty colorTextProperty() { return colorTextProperty; }
+
+    public StringProperty colorHighlightProperty() { return colorHighlightProperty; }
 }

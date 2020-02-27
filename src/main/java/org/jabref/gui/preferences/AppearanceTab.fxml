@@ -9,6 +9,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.shape.Rectangle?>
 <fx:root prefWidth="650.0" spacing="10.0" type="VBox" xmlns="http://javafx.com/javafx/11.0.1"
          xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.jabref.gui.preferences.AppearanceTabView">
     <fx:define>
@@ -32,12 +33,17 @@
     <RadioButton fx:id="themeImported" text="Imported theme" toggleGroup="$theme" />
     <RadioButton fx:id="themeCustom" text="%Custom theme" toggleGroup="$theme" />
     <HBox spacing="4.0" alignment="CENTER_LEFT">
-        <Label text="%Color" disable="${!themeCustom.selected}"/>
-        <TextField fx:id="backgroundColor" prefWidth="60" alignment="CENTER_RIGHT" disable="${!themeCustom.selected}"/>
+        <Label text="Background" disable="${!themeCustom.selected}"/>
+        <TextField fx:id="colorBackground" prefWidth="60" alignment="CENTER_RIGHT" disable="${!themeCustom.selected}"/>
     </HBox>
     <HBox spacing="4.0" alignment="CENTER_LEFT">
-        <Label text="%Color" disable="${!themeCustom.selected}"/>
-        <TextField fx:id="textColor" prefWidth="60" alignment="CENTER_RIGHT" disable="${!themeCustom.selected}"/>
+        <Label text="Text" disable="${!themeCustom.selected}"/>
+        <TextField fx:id="colorText" prefWidth="60" alignment="CENTER_RIGHT" disable="${!themeCustom.selected}"/>
+    </HBox>
+    <HBox spacing="4.0" alignment="CENTER_LEFT">
+        <Label text="Highlight" disable="${!themeCustom.selected}"/>
+        <TextField fx:id="colorHighlight" prefWidth="60" alignment="CENTER_RIGHT" disable="${!themeCustom.selected}"/>
+        <Rectangle width="20" height="20" fill="#110011"/>
     </HBox>
 
 </fx:root>

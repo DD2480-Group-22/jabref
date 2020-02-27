@@ -16,26 +16,26 @@
     -jr-yellow: #b5b021;
     -jr-orange: #b77620;
 
-    -jr-base: #dceddd;
+    -jr-base: #dcdcdd;
 
-    -jr-background-alt: #ddeedd;
-    -jr-menu-background: #dceddd;
+    -jr-background-alt: #dedede;
+    -jr-menu-background: #dcdcdd;
     -jr-toolbar: -jr-menu-background;
-    -jr-sidepane-background: #ddeedd;
-    -jr-search-background: #ddeedd;
+    -jr-sidepane-background: #212330;
+    -jr-search-background: #2c2e3b;
 
     -jr-sidepane-header-background: -jr-background-alt;
     -jr-group-hits-bg: -jr-background-alt;
     -jr-group-hits-fg: -fx-light-text-color;
-    -fx-control-inner-background: #ddeedd;
+    -fx-control-inner-background: #272b38;
 
     -fx-control-inner-background-alt: -fx-control-inner-background;
 
     -fx-dark-text-color: black;
-    -fx-mid-text-color: #112211;
-    -fx-light-text-color: #112211;
-    -jr-separator: #112211;
-    -fx-outer-border: #112211;
+    -fx-mid-text-color: #7d8591;
+    -fx-light-text-color: #9aa3af;
+    -jr-separator: #333744;
+    -fx-outer-border: #424758;
 
     -jr-icon: -fx-light-text-color;
     -jr-icon-active: derive(-fx-light-text-color, 50%);

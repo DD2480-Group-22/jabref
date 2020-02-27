@@ -22,8 +22,9 @@ public class AppearanceTabView extends AbstractPreferenceTabView<AppearanceTabVi
     @FXML public RadioButton themeDark;
     @FXML public RadioButton themeImported;
     @FXML public RadioButton themeCustom;
-    @FXML public TextField backgroundColor;
-    @FXML public TextField textColor;
+    @FXML public TextField colorBackground;
+    @FXML public TextField colorText;
+    @FXML public TextField colorHighlight;
 
     private final ControlsFxVisualizer validationVisualizer = new ControlsFxVisualizer();
 
@@ -50,8 +51,9 @@ public class AppearanceTabView extends AbstractPreferenceTabView<AppearanceTabVi
         themeImported.selectedProperty().bindBidirectional(viewModel.themeImportedProperty());
         themeCustom.selectedProperty().bindBidirectional(viewModel.themeCustomProperty());
 
-        backgroundColor.textProperty().bindBidirectional(viewModel.backgroundColorProperty());
-        textColor.textProperty().bindBidirectional(viewModel.textColorProperty());
+        colorBackground.textProperty().bindBidirectional(viewModel.colorBackgroundProperty());
+        colorText.textProperty().bindBidirectional(viewModel.colorTextProperty());
+        colorHighlight.textProperty().bindBidirectional(viewModel.colorHighlightProperty());
 
         validationVisualizer.setDecoration(new IconValidationDecorator());
         Platform.runLater(() -> validationVisualizer.initVisualization(viewModel.fontSizeValidationStatus(), fontSize));
