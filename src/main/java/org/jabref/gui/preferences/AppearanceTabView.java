@@ -84,6 +84,7 @@ public class AppearanceTabView extends AbstractPreferenceTabView<AppearanceTabVi
     private void addColorCodeListener(TextField textInput, StringProperty colorCode, Rectangle displayBox, String standardColor) {
         // Set the color display box to standard color
         displayBox.fillProperty().setValue(Paint.valueOf(standardColor));
+        colorCode.setValue(standardColor);
 
         // Add a listener that changes the color of the display and update the value used when saving the preferences
         // Uses input value is valid, standard color if not

@@ -2,7 +2,7 @@
     -jr-theme: [highlight];
     -jr-accent: [highlight-d1];
     -jr-selected: -jr-accent;
-    -jr-hover: #fff1;
+    -jr-hover: [highlight-l1];
 
 
     -jr-red: #b71c1f;
@@ -34,13 +34,13 @@
     -fx-dark-text-color: [text-d1];
     -fx-mid-text-color: [text];
     -fx-light-text-color: [text-l1];
-    -jr-separator: #333744;
-    -fx-outer-border: #424758;
+    -jr-separator: [background-l2];
+    -fx-outer-border: [background-l3];
 
     -jr-icon: -fx-light-text-color;
     -jr-icon-active: derive(-fx-light-text-color, 50%);
     -jr-icon-background-active: -jr-hover;
-    -jr-icon-background-armed: #fff2;
+    -jr-icon-background-armed: [highlight-l1];
 
     -jr-menu-foreground: -fx-light-text-color;
     -jr-menu-item-foreground: -fx-light-text-color;

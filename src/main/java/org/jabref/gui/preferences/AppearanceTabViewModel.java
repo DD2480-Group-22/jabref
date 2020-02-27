@@ -116,7 +116,6 @@ public class AppearanceTabViewModel implements PreferenceTabViewModel {
             preferences.put(JabRefPreferences.FX_THEME, preferences.getPathToCustomTheme());
         } else if (themeCustomProperty.getValue()) {
             restartWarnings.add(Localization.lang("Theme change to a custom theme."));
-            //TODO: Create and call function for creating custom CSS
             writeCustomTheme(colorBackgroundProperty.getValue(), colorTextProperty.getValueSafe(), colorHighlightProperty.getValueSafe());
             preferences.put(JabRefPreferences.FX_THEME, ThemeLoader.CUSTOM_CSS);
         }
@@ -132,24 +131,24 @@ public class AppearanceTabViewModel implements PreferenceTabViewModel {
             String line = null;
             while ((line = templateReader.readLine()) != null) {
                 line = line.replace("[background]", background);
-                line = line.replace("[background-d1]", colorCodeModifier(background, -2, -2, -1));
+                line = line.replace("[background-d1]", colorCodeModifier(background, -2, -2, -2));
                 line = line.replace("[background-l1]", colorCodeModifier(background, 11, 11, 11));
                 line = line.replace("[background-l2]", colorCodeModifier(background, 22, 22, 22));
-                line = line.replace("[text]", text);
-                line = line.replace("[text-d1]", colorCodeModifier(text, -100, -100, -100));
-                line = line.replace("[text-l1]", colorCodeModifier(text, 50, 50, 50));
-                line = line.replace("[highlight]", highlight);
-                line = line.replace("[highlight-d1]", colorCodeModifier(text, -50, -50, -50));
+                line = line.replace("[background-l3]", colorCodeModifier(background, 33, 33, 33));
 
+                line = line.replace("[text]", text);
+                line = line.replace("[text-d1]", colorCodeModifier(text, -50, -50, -50));
+                line = line.replace("[text-l1]", colorCodeModifier(text, 30, 30, 30));
+                line = line.replace("[highlight]", highlight);
+                line = line.replace("[highlight-d1]", colorCodeModifier(highlight, -50, -50, -50));
+                line = line.replace("[highlight-l1]", colorCodeModifier(highlight, 30, 30, 30));
 
                 themeWriter.write(line+"\n");
             }
-
             templateReader.close();
             themeWriter.close();
         } catch(IOException e) {
-            System.err.println(e.getMessage());
-            System.err.println("Error! Could not find css template file");
+            //LOGGER.warn("Cannot load css CustomTemplate.css", e);
         }
     }
 
