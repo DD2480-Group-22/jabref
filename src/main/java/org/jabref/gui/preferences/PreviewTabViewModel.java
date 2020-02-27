@@ -98,6 +98,8 @@ public class PreviewTabViewModel implements PreferenceTabViewModel {
         return showAsExtraTab;
     }
 
+    public void setExtraTabProperty(boolean value) { showAsExtraTab.set(value); }
+
     public void setValues() {
         showAsExtraTab.set(previewPreferences.showPreviewAsExtraTab());
         chosenListProperty().getValue().clear();
