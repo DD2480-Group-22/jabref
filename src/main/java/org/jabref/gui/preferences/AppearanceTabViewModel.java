@@ -1,5 +1,8 @@
 package org.jabref.gui.preferences;
 
+//TODO: Move IO imports with css writer function
+import java.io.*;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -113,8 +116,47 @@ public class AppearanceTabViewModel implements PreferenceTabViewModel {
         } else if (themeCustomProperty.getValue()) {
             restartWarnings.add(Localization.lang("Theme change to a custom theme."));
             //TODO: Create and call function for creating custom CSS
+            writeCustomTheme("#ddeedd", "#112211");
             preferences.put(JabRefPreferences.FX_THEME, ThemeLoader.CUSTOM_CSS);
         }
+    }
+
+    //TODO: Maybe move function to more appropriate file
+    private void writeCustomTheme(String background, String text) {
+        String path = "src/main/java/org/jabref/gui/";
+        try {
+            BufferedReader templateReader = new BufferedReader(new FileReader(path+"CustomTemplate.css"));
+            BufferedWriter themeWriter = new BufferedWriter(new FileWriter(path +"Custom.css"));
+
+            String line = null;
+            while ((line = templateReader.readLine()) != null) {
+                line = line.replace("[background]", background);
+                line = line.replace("[background-light]", colorCodeModifier(background, -1, -1, 0));
+                line = line.replace("[text]", text);
+
+                themeWriter.write(line+"\n");
+            }
+
+            templateReader.close();
+            themeWriter.close();
+        } catch(IOException e) {
+            System.err.println(e.getMessage());
+            System.err.println("Error! Could not find css template file");
+        }
+    }
+
+    private String colorCodeModifier(String colorCode, int redModification, int greenModification, int blueModification) {
+        int red = Integer.parseInt(colorCode.substring(1,3),16);
+        int green = Integer.parseInt(colorCode.substring(3,5),16);
+        int blue = Integer.parseInt(colorCode.substring(5),16);
+
+        red += redModification;
+        green += greenModification;
+        blue += blueModification;
+
+        String modifiedColorCode = "#" + Integer.toHexString(red) + Integer.toHexString(green) + Integer.toHexString(blue);
+
+        return modifiedColorCode;
     }
 
     public ValidationStatus fontSizeValidationStatus() { return fontSizeValidator.getValidationStatus(); }

@@ -16,26 +16,26 @@
     -jr-yellow: #b5b021;
     -jr-orange: #b77620;
 
-    -jr-base: #dceddd;
+    -jr-base: [background-light];
 
-    -jr-background-alt: #ddeedd;
-    -jr-menu-background: #dceddd;
+    -jr-background-alt: [background];
+    -jr-menu-background: [background-light];
     -jr-toolbar: -jr-menu-background;
-    -jr-sidepane-background: #ddeedd;
-    -jr-search-background: #ddeedd;
+    -jr-sidepane-background: [background];
+    -jr-search-background: [background];
 
     -jr-sidepane-header-background: -jr-background-alt;
     -jr-group-hits-bg: -jr-background-alt;
     -jr-group-hits-fg: -fx-light-text-color;
-    -fx-control-inner-background: #ddeedd;
+    -fx-control-inner-background: [background];
 
     -fx-control-inner-background-alt: -fx-control-inner-background;
 
     -fx-dark-text-color: black;
-    -fx-mid-text-color: #112211;
-    -fx-light-text-color: #112211;
-    -jr-separator: #112211;
-    -fx-outer-border: #112211;
+    -fx-mid-text-color: [text];
+    -fx-light-text-color: [text];
+    -jr-separator: [text];
+    -fx-outer-border: [text];
 
     -jr-icon: -fx-light-text-color;
     -jr-icon-active: derive(-fx-light-text-color, 50%);
