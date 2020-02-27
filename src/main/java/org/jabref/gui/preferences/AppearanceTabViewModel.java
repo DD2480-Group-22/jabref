@@ -117,24 +117,13 @@ public class AppearanceTabViewModel implements PreferenceTabViewModel {
         } else if (themeCustomProperty.getValue()) {
             restartWarnings.add(Localization.lang("Theme change to a custom theme."));
             //TODO: Create and call function for creating custom CSS
-            writeCustomTheme(colorBackgroundProperty.getValueSafe(), colorTextProperty.getValueSafe(), colorHighlightProperty.getValueSafe());
+            writeCustomTheme(colorBackgroundProperty.getValue(), colorTextProperty.getValueSafe(), colorHighlightProperty.getValueSafe());
             preferences.put(JabRefPreferences.FX_THEME, ThemeLoader.CUSTOM_CSS);
         }
     }
 
     //TODO: Maybe move function to more appropriate file
     private void writeCustomTheme(String background, String text, String highlight) {
-        String colorCodeRegex = "\\#[\\dabcdef]{6}";
-        if (!background.matches(colorCodeRegex)) {
-            background = "#dedede";
-        }
-        if (!text.matches(colorCodeRegex)) {
-            text = "#101010";
-        }
-        if (!highlight.matches(colorCodeRegex)) {
-            highlight = "#919191";
-        }
-
         String path = "src/main/java/org/jabref/gui/";
         try {
             BufferedReader templateReader = new BufferedReader(new FileReader(path+"CustomTemplate.css"));
@@ -144,11 +133,13 @@ public class AppearanceTabViewModel implements PreferenceTabViewModel {
             while ((line = templateReader.readLine()) != null) {
                 line = line.replace("[background]", background);
                 line = line.replace("[background-d1]", colorCodeModifier(background, -2, -2, -1));
-                line = line.replace("[background-l1]", colorCodeModifier(background, 12, 21, 8));
-                line = line.replace("[background-l2]", colorCodeModifier(background, 23, 32, 19));
+                line = line.replace("[background-l1]", colorCodeModifier(background, 11, 11, 11));
+                line = line.replace("[background-l2]", colorCodeModifier(background, 22, 22, 22));
                 line = line.replace("[text]", text);
                 line = line.replace("[text-d1]", colorCodeModifier(text, -100, -100, -100));
                 line = line.replace("[text-l1]", colorCodeModifier(text, 50, 50, 50));
+                line = line.replace("[highlight]", highlight);
+                line = line.replace("[highlight-d1]", colorCodeModifier(text, -50, -50, -50));
 
 
                 themeWriter.write(line+"\n");
