@@ -143,7 +143,12 @@ public class AppearanceTabViewModel implements PreferenceTabViewModel {
             String line = null;
             while ((line = templateReader.readLine()) != null) {
                 line = line.replace("[background]", background);
-                line = line.replace("[background-l1]", colorCodeModifier(background, -2, -2, -1));
+                line = line.replace("[background-d1]", colorCodeModifier(background, -2, -2, -1));
+                line = line.replace("[background-l1]", colorCodeModifier(background, 12, 21, 8));
+                line = line.replace("[background-l2]", colorCodeModifier(background, 23, 32, 19));
+                line = line.replace("[text]", text);
+                line = line.replace("[text-d1]", colorCodeModifier(text, -100, -100, -100));
+                line = line.replace("[text-l1]", colorCodeModifier(text, 50, 50, 50));
 
 
                 themeWriter.write(line+"\n");
@@ -175,7 +180,7 @@ public class AppearanceTabViewModel implements PreferenceTabViewModel {
         blue = (blue > 255 ) ? 255 : blue;
 
         String modifiedColorCode = "#" + Integer.toHexString(red) + Integer.toHexString(green) + Integer.toHexString(blue);
-        
+
         return modifiedColorCode;
     }
 
