@@ -204,7 +204,7 @@ public class PreferencesDialogViewModel extends AbstractViewModel {
 
         dialogService.showFileOpenDialog(fileDialogConfiguration).ifPresent(file -> {
 
-            preferences.setPathToCustomTheme(file.toAbsolutePath().toString());
+            preferences.setPathToImportedTheme(file.toAbsolutePath().toString());
 
             dialogService.showWarningDialogAndWait(Localization.lang("Import CSS"),
                     Localization.lang("You must restart JabRef for this to come into effect."));

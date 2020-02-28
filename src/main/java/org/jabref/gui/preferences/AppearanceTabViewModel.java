@@ -113,7 +113,7 @@ public class AppearanceTabViewModel implements PreferenceTabViewModel {
             preferences.put(JabRefPreferences.FX_THEME, ThemeLoader.DARK_CSS);
         } else if (themeImportedProperty.getValue()) {
             restartWarnings.add(Localization.lang("Theme change to a imported theme."));
-            preferences.put(JabRefPreferences.FX_THEME, preferences.getPathToCustomTheme());
+            preferences.put(JabRefPreferences.FX_THEME, preferences.getPathToImportedTheme());
         } else if (themeCustomProperty.getValue()) {
             restartWarnings.add(Localization.lang("Theme change to a custom theme."));
             writeCustomTheme(colorBackgroundProperty.getValue(), colorTextProperty.getValueSafe(), colorHighlightProperty.getValueSafe());
@@ -125,6 +125,7 @@ public class AppearanceTabViewModel implements PreferenceTabViewModel {
     private void writeCustomTheme(String background, String text, String highlight) {
         String path = "src/main/java/org/jabref/gui/";
         try {
+            // Read from template and then write to Custom.css with the placeholder fields replaced with real values
             BufferedReader templateReader = new BufferedReader(new FileReader(path+"CustomTemplate.css"));
             BufferedWriter themeWriter = new BufferedWriter(new FileWriter(path +"Custom.css"));
 
@@ -153,24 +154,28 @@ public class AppearanceTabViewModel implements PreferenceTabViewModel {
     }
 
     private String colorCodeModifier(String colorCode, int redModification, int greenModification, int blueModification) {
+        // Turn the RGB values of the hexadecimal color-coded string to decimal values
         int red = Integer.parseInt(colorCode.substring(1,3),16);
         int green = Integer.parseInt(colorCode.substring(3,5),16);
         int blue = Integer.parseInt(colorCode.substring(5),16);
 
+        // Modify the values
         red += redModification;
         green += greenModification;
         blue += blueModification;
 
+        // Check and bound the values within the acceptable range
         red = (red < 0 ) ? 0 : red;
         green = (green < 0 ) ? 0 : green;
         blue = (blue < 0 ) ? 0 : blue;
-
         red = (red > 255 ) ? 255 : red;
         green = (green > 255 ) ? 255 : green;
         blue = (blue > 255 ) ? 255 : blue;
 
+        // Turn the modified RGB values back to color-coded string
         String modifiedColorCode = "#" + Integer.toHexString(red) + Integer.toHexString(green) + Integer.toHexString(blue);
 
+        // Return modified color-code
         return modifiedColorCode;
     }
 

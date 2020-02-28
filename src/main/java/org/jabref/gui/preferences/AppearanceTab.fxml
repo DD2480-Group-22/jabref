@@ -30,22 +30,25 @@
     <Label styleClass="sectionHeader" text="%Visual theme"/>
     <RadioButton fx:id="themeLight" text="%Light theme" toggleGroup="$theme"/>
     <RadioButton fx:id="themeDark" text="%Dark theme" toggleGroup="$theme"/>
-    <RadioButton fx:id="themeImported" text="Imported theme" toggleGroup="$theme" />
+    <RadioButton fx:id="themeImported" text="%Imported theme" toggleGroup="$theme" />
     <RadioButton fx:id="themeCustom" text="%Custom theme" toggleGroup="$theme" />
-    <HBox spacing="4.0" alignment="CENTER_LEFT">
-        <Label text="Background" disable="${!themeCustom.selected}"/>
-        <TextField fx:id="colorBackground" prefWidth="60" alignment="CENTER_RIGHT" disable="${!themeCustom.selected}"/>
-        <Rectangle fx:id="colorBackgroundDisplay" width="20" height="20"/>
-    </HBox>
-    <HBox spacing="4.0" alignment="CENTER_LEFT">
-        <Label text="Text" disable="${!themeCustom.selected}"/>
-        <TextField fx:id="colorText" prefWidth="60" alignment="CENTER_RIGHT" disable="${!themeCustom.selected}"/>
-        <Rectangle fx:id="colorTextDisplay" width="20" height="20"/>
-    </HBox>
-    <HBox spacing="4.0" alignment="CENTER_LEFT">
-        <Label text="Highlight" disable="${!themeCustom.selected}"/>
-        <TextField fx:id="colorHighlight" prefWidth="60" alignment="CENTER_RIGHT" disable="${!themeCustom.selected}"/>
-        <Rectangle fx:id="colorHighlightDisplay" width="20" height="20"/>
-    </HBox>
+
+    <VBox maxWidth="200" spacing="4.0">
+        <HBox spacing="4.0" alignment="CENTER_RIGHT">
+            <Label text="%Background:" disable="${!themeCustom.selected}"/>
+            <TextField fx:id="colorBackground" prefWidth="60" alignment="CENTER_RIGHT" disable="${!themeCustom.selected}"/>
+            <Rectangle fx:id="colorBackgroundDisplay" width="20" height="20"/>
+        </HBox>
+        <HBox spacing="4.0" alignment="CENTER_RIGHT">
+            <Label text="%Text:" disable="${!themeCustom.selected}"/>
+            <TextField fx:id="colorText" prefWidth="60" alignment="CENTER_RIGHT" disable="${!themeCustom.selected}"/>
+            <Rectangle fx:id="colorTextDisplay" width="20" height="20"/>
+        </HBox>
+        <HBox spacing="4.0" alignment="CENTER_RIGHT">
+            <Label text="%Highlight:" disable="${!themeCustom.selected}"/>
+            <TextField fx:id="colorHighlight" prefWidth="60" alignment="CENTER_RIGHT" disable="${!themeCustom.selected}"/>
+            <Rectangle fx:id="colorHighlightDisplay" width="20" height="20"/>
+        </HBox>
+    </VBox>
 
 </fx:root>

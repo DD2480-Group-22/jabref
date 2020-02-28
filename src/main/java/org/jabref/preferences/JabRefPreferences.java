@@ -403,7 +403,7 @@ public class JabRefPreferences implements PreferencesService {
     private static final int EXPORTER_FILENAME_INDEX = 1;
     private static final int EXPORTER_EXTENSION_INDEX = 2;
 
-    private static final String PATH_TO_CUSTOM_THEME = "pathToCustomTheme";
+    private static final String PATH_TO_IMPORTED_THEME = "pathToCustomTheme";
 
     // The only instance of this class:
     private static JabRefPreferences singleton;
@@ -761,7 +761,7 @@ public class JabRefPreferences implements PreferencesService {
 
         // set default theme
         defaults.put(JabRefPreferences.FX_THEME, ThemeLoader.MAIN_CSS);
-        defaults.put(JabRefPreferences.PATH_TO_CUSTOM_THEME, "");
+        defaults.put(JabRefPreferences.PATH_TO_IMPORTED_THEME, "");
 
         setLanguageDependentDefaultValues();
     }
@@ -971,12 +971,12 @@ public class JabRefPreferences implements PreferencesService {
         return customFields;
     }
 
-    public void setPathToCustomTheme(String path) {
-        put(PATH_TO_CUSTOM_THEME, path);
+    public void setPathToImportedTheme(String path) {
+        put(PATH_TO_IMPORTED_THEME, path);
     }
 
-    public String getPathToCustomTheme() {
-        return get(PATH_TO_CUSTOM_THEME);
+    public String getPathToImportedTheme() {
+        return get(PATH_TO_IMPORTED_THEME);
     }
 
     public void setLanguageDependentDefaultValues() {
