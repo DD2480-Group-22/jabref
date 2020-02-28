@@ -184,9 +184,9 @@ public class PreviewTabViewModel implements PreferenceTabViewModel {
             chosenListProperty.add(previewPreferences.getTextBasedPreviewLayout());
         }
 
-        if (!previewPreferences.showPreviewAsExtraTab && showAsExtraTab.getValue() ) {
+        if (!previewPreferences.getShowPreviewAsExtraTab() && showAsExtraTab.getValue() ) {
             restartWarnings.add(Localization.lang("Preview separate tab enabled"));
-        } else if (previewPreferences.showPreviewAsExtraTab && !showAsExtraTab.getValue() ) {
+        } else if (previewPreferences.getShowPreviewAsExtraTab() && !showAsExtraTab.getValue() ) {
             restartWarnings.add(Localization.lang("Preview separate tab disabled"));
 
         }
